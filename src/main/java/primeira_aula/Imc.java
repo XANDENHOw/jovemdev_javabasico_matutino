@@ -1,20 +1,14 @@
 package primeira_aula;
 
-import javax.swing.JOptionPane;
 
 public class Imc {
 
-	static String nome = JOptionPane.showInputDialog("Informe o nome");
-	static String sexo = JOptionPane.showInputDialog("Informe o sexo");
-	static String pesoDigitado = JOptionPane.showInputDialog("Informe o peso");
-	static Double peso = Double.parseDouble(pesoDigitado);
-	static String alturaDigitada = JOptionPane.showInputDialog("Informe a altura");
-	static Double altura = Double.parseDouble(alturaDigitada);
+	 String nome;
+	 String sexo;
+	 Double peso;
+	 Double altura;
 
-	public static void main() {
-		System.out.println(nome + " " + calculaIMC(peso, altura) + " " + avaliaIMC(calculaIMC(peso, altura), sexo));
 
-	}
 
 	public static Double calculaIMC(Double peso, Double altura) {
 
