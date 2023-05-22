@@ -4,19 +4,15 @@ import javax.swing.JOptionPane;
 
 public class Imc {
 
-
-	
 	static String nome = JOptionPane.showInputDialog("Informe o nome");
 	static String sexo = JOptionPane.showInputDialog("Informe o sexo");
 	static String pesoDigitado = JOptionPane.showInputDialog("Informe o peso");
 	static Double peso = Double.parseDouble(pesoDigitado);
 	static String alturaDigitada = JOptionPane.showInputDialog("Informe a altura");
 	static Double altura = Double.parseDouble(alturaDigitada);
-	
-	public static void main() {
-		System.out.println(nome + " " + calculaIMC(peso,altura) + " "
-				+ avaliaIMC(calculaIMC(peso, altura), sexo));
 
+	public static void main() {
+		System.out.println(nome + " " + calculaIMC(peso, altura) + " " + avaliaIMC(calculaIMC(peso, altura), sexo));
 
 	}
 
@@ -24,9 +20,9 @@ public class Imc {
 
 		Double IMC = peso / (altura * altura);
 		return IMC;
-		
+
 	}
-	
+
 	public static String avaliaIMC(Double IMC, String sexo) {
 		if (sexo == "masculino") {
 			if (IMC < 20.7) {
@@ -42,6 +38,7 @@ public class Imc {
 			}
 
 		} else {
+
 			if (IMC < 19.1) {
 				return "Abaixo do peso";
 			} else if (IMC >= 19.1 && IMC <= 25.8) {
@@ -53,6 +50,7 @@ public class Imc {
 			} else {
 				return "Obesidade";
 			}
+
 		}
 	}
 
