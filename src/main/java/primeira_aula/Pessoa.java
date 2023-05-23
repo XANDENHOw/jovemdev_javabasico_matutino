@@ -5,8 +5,8 @@ public class Pessoa {
 
 	 String nome;
 	 String sexo;
-	 Double peso;
-	 Double altura;
+	 double peso;
+	 double altura;
 
 
 
@@ -18,7 +18,7 @@ public class Pessoa {
 	}
 
 	public static String avaliaIMC(Double IMC, String sexo) {
-		if (sexo == "masculino") {
+		if (sexo.equalsIgnoreCase("masculino")) {
 			if (IMC < 20.7) {
 				return "Abaixo do peso";
 			} else if (IMC >= 20.7 && IMC <= 26.4) {
