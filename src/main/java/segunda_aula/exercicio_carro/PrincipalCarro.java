@@ -22,28 +22,36 @@ public class PrincipalCarro {
 			} else if (op == 2) {
 				int anoInicial = Integer.parseInt(JOptionPane.showInputDialog("Informe o ano inicial"));
 				int anoFinal = Integer.parseInt(JOptionPane.showInputDialog("Informe o ano final"));
-				String resultado = "";
+				String resultadoAno = "";
+				double porcentagem = 0;
+
 				List<Carro> carrosFiltradosAno = new ArrayList<Carro>();
 				for (Carro carro : carros) {
 					if (carro.getAno() >= anoInicial && carro.getAno() <= anoFinal) {
 						carrosFiltradosAno.add(carro);
-						resultado += carrosFiltradosAno.toString();
+						resultadoAno = carrosFiltradosAno.toString();
+						porcentagem = (carrosFiltradosAno.size() / carros.size()) * 100;
+
 					}
-					JOptionPane.showMessageDialog(null, resultado);
+					JOptionPane.showMessageDialog(null, resultadoAno + "Os carros fabricados no período representam"
+							+ porcentagem + "% dos carros.");
 				}
 			} else if (op == 3) {
 				String marca = JOptionPane.showInputDialog("Informe a marca que seja buscar");
-				String resultado = "";
+				String resultadoMarca = "";
+				double porcentagem = 0;
 				List<Carro> carrosFiltradosMarca = new ArrayList<Carro>();
 				for (Carro carro : carros) {
-					if (carro.getMarca().toUpperCase() == marca) {
+					if (carro.getMarca().equalsIgnoreCase(marca)) {
 						carrosFiltradosMarca.add(carro);
-						resultado += carrosFiltradosMarca.toString();
+						resultadoMarca = carrosFiltradosMarca.toString();
+						porcentagem = (carrosFiltradosMarca.size() / carros.size()) * 100;
 					}
+					JOptionPane.showMessageDialog(null, resultadoMarca + "Os carros da marca escolhida representam"
+							+ porcentagem + "% dos carros.");
 				}
-				JOptionPane.showMessageDialog(null, resultado);
 			} else if (op == 4) {
-				
+
 			}
 		} while (op != 5);
 

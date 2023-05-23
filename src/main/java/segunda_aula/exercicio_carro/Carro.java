@@ -24,7 +24,7 @@ public class Carro {
 
 	void cadastra() {
 
-		marca = JOptionPane.showInputDialog("Marca");
+		marca= JOptionPane.showInputDialog("Marca");
 		ano = Integer.parseInt(JOptionPane.showInputDialog("Ano"));
 		String menu = "Selecone o número referente a cor desejada:\n" + "1 - Branco\n" + "2 -  Preto\n"
 				+ "3 - Vermelho\n" + "4 - Azul\n" + "0 - Cancelar";
