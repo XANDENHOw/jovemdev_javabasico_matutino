@@ -1,7 +1,7 @@
 package primeira_aula;
 
 
-public class Imc {
+public class Pessoa {
 
 	 String nome;
 	 String sexo;
