@@ -2,11 +2,16 @@ package segunda_aula.exercicio_carro;
 
 import javax.swing.JOptionPane;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Carro {
 
-	String marca;
-	int ano;
-	EnumCor cor;
+	private String marca;
+	private int ano;
+	private EnumCor cor;
 
 	void cadastra() {
 
@@ -49,7 +54,7 @@ public class Carro {
 	public String toString() {
 		return "Marca: " + marca + " \n"
 				+ "Ano: " + ano + "\n"
-				+ "Cor: " + cor.descricao
+				+ "Cor: " + cor.getDescricao()
 				+ "\n\n";
 	}
 

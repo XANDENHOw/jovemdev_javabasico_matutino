@@ -1,5 +1,10 @@
 package segunda_aula.exercicio_carro;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum EnumCor {
 
 	BRANCO(1, "Branco"),
@@ -7,13 +12,9 @@ public enum EnumCor {
 	PRATA(3, "Prata"),
 	VERMELHO(4, "Vermelho");
 
-	public int codigo;
-	public String descricao;
-	
-	private EnumCor(int codigo, String descricao) {
-		this.codigo = codigo;
-		this.descricao = descricao;
-	}
+	private int codigo;
+	private String descricao;
+
 
 	public static EnumCor findById(int codigo) {
 		for (EnumCor cor : EnumCor.values()) {

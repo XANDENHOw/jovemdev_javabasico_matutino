@@ -9,7 +9,7 @@ public class Util {
 	static EnumCor escolheCor() {
 		String menu = "Cores disponíveis\n";
 		for (EnumCor cor : EnumCor.values()) {
-			menu += cor.codigo + " - " + cor.descricao + "\n";
+			menu += cor.getCodigo() + " - " + cor.getDescricao() + "\n";
 		}
 		int op = Integer.parseInt(JOptionPane.showInputDialog(menu));
 		return EnumCor.findById(op);
@@ -47,7 +47,7 @@ public class Util {
 
 	static String listaPorCor(List<Carro> carros) {
 		EnumCor cor = escolheCor();
-		String ret = "Carros da cor %s (%s)\n".formatted(cor.descricao);
+		String ret = "Carros da cor %s (%s)\n".formatted(cor.getDescricao());
 		int count = 0;
 		for (Carro c : carros) {
 			if (c.isCor(cor)) {
