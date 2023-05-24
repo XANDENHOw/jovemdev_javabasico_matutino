@@ -6,63 +6,51 @@ public class Carro {
 
 	String marca;
 	int ano;
-	Cores cor;
-
-	enum Cores {
-		BRANCO(1), PRETO(2), VERMELHO(3), AZUL(4);
-
-		private int cor;
-
-		Cores(int cor) {
-			this.cor = cor;
-		}
-
-		public int getCor() {
-			return cor;
-		}
-	}
+	EnumCor cor;
 
 	void cadastra() {
 
-		marca= JOptionPane.showInputDialog("Marca");
+		marca = JOptionPane.showInputDialog("Marca");
 		ano = Integer.parseInt(JOptionPane.showInputDialog("Ano"));
-		String menu = "Selecone o número referente a cor desejada:\n" + "1 - Branco\n" + "2 -  Preto\n"
-				+ "3 - Vermelho\n" + "4 - Azul\n" + "0 - Cancelar";
-		int op = 0;
-
-		do {
-			op = Integer.parseInt(JOptionPane.showInputDialog(menu));
-			if (op == 1) {
-				cor = Cores.BRANCO;
-			} else if (op == 2) {
-				cor = Cores.PRETO;
-			} else if (op == 3) {
-				cor = Cores.VERMELHO;
-			} else if (op == 4) {
-				cor = Cores.AZUL;
-			}
-			break;
-		} while (op != 0);
-
+		cor = Util.escolheCor();
+		if (!validar()) {
+			cadastra();
+		}
 	}
 
-	public String getMarca() {
-		return marca;
+	boolean validar() {
+		if (marca.trim().equals("")) {
+			JOptionPane.showMessageDialog(null, "A marca deve ser preenchida");
+			return false;
+		}
+		if (ano < 0 || ano > 2023) {
+			JOptionPane.showMessageDialog(null, "Ano inválido");
+			return false;
+		}
+		if (cor == null) {
+			JOptionPane.showMessageDialog(null, "Cor inválida");
+			return false;
+		}
+		return true;
 	}
 
-	public void setMarca(String marca) {
-		this.marca = marca;
+	boolean isPeriodoFabricacao(int anoInicial, int anoFinal) {
+		return ano >= anoInicial && ano <= anoFinal;
 	}
 
-	public int getAno() {
-		return ano;
+	boolean isMarca(String marcaBusca) {
+		return marcaBusca.equalsIgnoreCase(marca);
 	}
 
-	public void setAno(int ano) {
-		this.ano = ano;
+	boolean isCor(EnumCor corBusca) {
+		return corBusca == cor;
 	}
+
 	public String toString() {
-		return marca + " - " + ano + " - " + cor;
+		return "Marca: " + marca + " \n"
+				+ "Ano: " + ano + "\n"
+				+ "Cor: " + cor.descricao
+				+ "\n\n";
 	}
 
 }
