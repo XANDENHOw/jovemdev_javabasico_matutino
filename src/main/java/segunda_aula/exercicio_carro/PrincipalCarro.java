@@ -51,7 +51,26 @@ public class PrincipalCarro {
 							+ porcentagem + "% dos carros.");
 				}
 			} else if (op == 4) {
-
+				else if (op == 4) {
+					int corIndex =0;
+					for (Cores cor : EnumSet.allOf(Cores.class)) {
+			            System.out.println(corIndex + " - " + cor);
+			            corIndex++;
+					}
+					int corOpcao = Integer.parseInt(JOptionPane.showInputDialog("Informe o número referente a cor que deseja filtar"));
+					Cores corSelecionada = Cores.values()[corOpcao];
+					String resultadoCor = "";
+					List<Carro> carrosFiltradosCor = new ArrayList<Carro>();
+					double porcentagem = 0;
+					for (Carro carro : carros) {
+						if (carro.cor == corSelecionada) {
+							carrosFiltradosCor.add(carro);
+							resultadoCor = carrosFiltradosCor.toString();
+							porcentagem = (carrosFiltradosCor.size() / carros.size()) * 100;
+						}
+						JOptionPane.showMessageDialog(null,
+								resultadoCor + "Os carros da marca escolhida representam" + porcentagem + "% dos carros.");
+				}
 			}
 		} while (op != 5);
 
