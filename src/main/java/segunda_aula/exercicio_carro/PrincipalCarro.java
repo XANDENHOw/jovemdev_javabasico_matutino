@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import segunda_aula.exercicio_carro.Carro.Cores;
+
 public class PrincipalCarro {
 
 	static List<Carro> carros = new ArrayList<Carro>();
@@ -30,7 +32,7 @@ public class PrincipalCarro {
 					if (carro.getAno() >= anoInicial && carro.getAno() <= anoFinal) {
 						carrosFiltradosAno.add(carro);
 						resultadoAno = carrosFiltradosAno.toString();
-						porcentagem = (carrosFiltradosAno.size() / carros.size()) * 100;
+						porcentagem += (carrosFiltradosAno.size() / carros.size()) * 100;
 
 					}
 					JOptionPane.showMessageDialog(null, resultadoAno + "Os carros fabricados no período representam"
@@ -45,18 +47,13 @@ public class PrincipalCarro {
 					if (carro.getMarca().equalsIgnoreCase(marca)) {
 						carrosFiltradosMarca.add(carro);
 						resultadoMarca = carrosFiltradosMarca.toString();
-						porcentagem = (carrosFiltradosMarca.size() / carros.size()) * 100;
+						porcentagem += (carrosFiltradosMarca.size() / carros.size()) * 100;
 					}
 					JOptionPane.showMessageDialog(null, resultadoMarca + "Os carros da marca escolhida representam"
 							+ porcentagem + "% dos carros.");
 				}
 			} else if (op == 4) {
-				else if (op == 4) {
-					int corIndex =0;
-					for (Cores cor : EnumSet.allOf(Cores.class)) {
-			            System.out.println(corIndex + " - " + cor);
-			            corIndex++;
-					}
+					
 					int corOpcao = Integer.parseInt(JOptionPane.showInputDialog("Informe o número referente a cor que deseja filtar"));
 					Cores corSelecionada = Cores.values()[corOpcao];
 					String resultadoCor = "";
@@ -66,10 +63,10 @@ public class PrincipalCarro {
 						if (carro.cor == corSelecionada) {
 							carrosFiltradosCor.add(carro);
 							resultadoCor = carrosFiltradosCor.toString();
-							porcentagem = (carrosFiltradosCor.size() / carros.size()) * 100;
+							porcentagem += (carrosFiltradosCor.size() / carros.size()) * 100;
 						}
 						JOptionPane.showMessageDialog(null,
-								resultadoCor + "Os carros da marca escolhida representam" + porcentagem + "% dos carros.");
+								resultadoCor + "Os carros da cor escolhida representam" + porcentagem + "% dos carros.");
 				}
 			}
 		} while (op != 5);

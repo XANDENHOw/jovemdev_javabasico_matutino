@@ -9,15 +9,15 @@ public class Carro {
 	Cores cor;
 
 	enum Cores {
-		BRANCO("branco"), PRETO("preto"), VERMELHO("vermelho"), AZUL("azul");
+		BRANCO(1), PRETO(2), VERMELHO(3), AZUL(4);
 
-		private String cor;
+		private int cor;
 
-		Cores(String cor) {
+		Cores(int cor) {
 			this.cor = cor;
 		}
 
-		public String getCor() {
+		public int getCor() {
 			return cor;
 		}
 	}
