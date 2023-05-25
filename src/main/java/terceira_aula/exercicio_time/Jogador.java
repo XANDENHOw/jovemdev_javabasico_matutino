@@ -11,20 +11,15 @@ public class Jogador {
 	private String nome;
 	private int numCamisa;
 	private int numGols;
-	
+
 	public void cadastraJogador() {
-		
 		nome = JOptionPane.showInputDialog("Informe o nome do jogador");
 		numCamisa = Integer.parseInt(JOptionPane.showInputDialog("Informe o número da camisa"));
 		numGols = Integer.parseInt(JOptionPane.showInputDialog("Informe o número de gols marcados"));
 	}
-	
-	
+
 	public String toString() {
-		return "Nome: " + nome + " \n"
-				+ "Camisa: " + numCamisa + "\n"
-				+ "Gols marcados: " + numGols
-				+ "\n\n";
+		return "Nome: " + nome + " \n" + "Camisa: " + numCamisa + "\n" + "Gols marcados: " + numGols + "\n\n";
 	}
-	
+
 }
