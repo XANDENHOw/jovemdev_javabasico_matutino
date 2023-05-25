@@ -5,35 +5,29 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-
-
 public class PrincipalTime {
-	
-	static List<Time> times = new ArrayList<Time>();	
-	static List<Jogador> jogadores = new ArrayList<Jogador>();	
-	
+
+
 	public static void main(String[] args) {
-		
+
+		List<Time> times = new ArrayList<Time>();
 		int op = 0;
 		do {
-			op = UtilTime.escolheOpcao();
+			op = Util.escolheOpcao();
 			switch (op) {
 			case 1:
-				Time t = new Time();
-				t.cadastraTime();
-				times.add(t);
+				Util.cadastraTime(times);
 				break;
 			case 2:
-				
+				Util.listaJogadoresTime(times);
 				break;
 
 			case 3:
-				JOptionPane.showMessageDialog(null, Time.obterArtilheiro());
-
+				Util.artilheiroCampeonato(times);
 				break;
 
 			case 4:
-
+				Util.timeMaisGols(times);
 				break;
 
 			case 5:
@@ -45,6 +39,6 @@ public class PrincipalTime {
 			}
 
 		} while (op != 5);
-		
+
 	}
 }

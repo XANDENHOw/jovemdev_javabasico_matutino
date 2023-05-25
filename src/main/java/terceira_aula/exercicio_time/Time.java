@@ -17,33 +17,43 @@ public class Time {
 
 	void cadastraTime() {
 		nomeTime = JOptionPane.showInputDialog("Informe o nome do time");
-		cadastrarJogador();
+		String op = "";
+		do {
+			Jogador j = new Jogador();
+			j.cadastraJogador();
+			jogadores.add(j);
+			op = JOptionPane.showInputDialog("Deseja cadastrar mais jogadores? (S/N)");
+		} while (op.equalsIgnoreCase("S"));
 
 	}
-	
-	public void cadastrarJogador() {
-		Jogador jogador = new Jogador();
-		jogador.cadastraJogador();
-		jogadores.add(jogador);
-	}
 
-	 Jogador obterArtilheiro() {
-		Jogador artilheiro = null;
-		int maiorGols = 0;
+	public Jogador getArtilheiro() {
+		Jogador artilheiro = jogadores.get(0);
 		for (Jogador jogador : jogadores) {
-			if (jogador.getNumGols() > maiorGols) {
+			if (jogador.getNumGols() > artilheiro.getNumGols()) {
 				artilheiro = jogador;
-				maiorGols = jogador.getNumGols();
 			}
 		}
 		return artilheiro;
 	}
 
-	String listaJogadores() {
-		String nomeTime = JOptionPane.showInputDialog("Nome do time");
+	public String listaJogadores() {
 		String ret = "Jogadores do %s \n".formatted(nomeTime);
-		int count = 0;
-
+		for (Jogador jogador : jogadores) {
+			ret += jogador;
+		}
 		return ret;
+	}
+
+	public int getGols() {
+		int gols = 0;
+		for (Jogador jogador : jogadores) {
+			gols += jogador.getNumGols();
+		}
+		return gols;
+	}
+
+	public String toString() {
+		return "\nTime: " + getNomeTime() + "\n" + listaJogadores();
 	}
 }
