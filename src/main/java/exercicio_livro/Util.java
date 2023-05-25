@@ -42,23 +42,33 @@ public class Util {
 
 	}
 
-	public static void listarTodosLivros() {
+	public static Livro listarTodosLivros(List<Livro> livros) {
+		String menu = "Listar livros\n";
+		int pos = 1;
+		for (Livro livro : livros) {
+			menu += pos + " - " + livro.getTitulo() + " - " +
+					livro.getValor() + " - " +
+					livro.getAutores() + "\n";
+			pos++;
+		}
+		JOptionPane.showMessageDialog(null, menu);
+		return livros.get(pos);// falta os dados dos autores
 
 	}
 
-	public static void buscaLivroAutor() {
+	public static void buscaLivroAutor(List<Livro> livros) {
 
 	}
 
-	public static void buscaLivroPreco() {
+	public static void buscaLivroPreco(List<Livro> livros) {
 
 	}
 
-	public static void buscaAutorCrianca() {
+	public static void buscaAutorCrianca(List<Livro> livros) {
 
 	}
 
-	public static void buscaAutorGenero() {
+	public static void buscaAutorGenero(List<Livro> livros) {
 		
 	}
 	

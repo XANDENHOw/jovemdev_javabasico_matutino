@@ -25,7 +25,7 @@ public class Livro {
 			do{
 				numAutores ++;
 			} while (numAutores <= 4);
-			op = JOptionPane.showInputDialog("Deseja cadastrar mais jogadores? (S/N)");
+			op = JOptionPane.showInputDialog("Deseja cadastrar mais autores? (S/N)");
 		} while (op.equalsIgnoreCase("S"));
 	}
 	
