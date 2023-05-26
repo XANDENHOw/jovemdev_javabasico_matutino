@@ -36,7 +36,7 @@ public class Principal {
 				//Util.buscaAutorGenero(livros);
 				break;
 			case 8:
-				JOptionPane.showMessageDialog(null, "By");
+				JOptionPane.showMessageDialog(null, "Encerrando");
 				break;
 
 			default:

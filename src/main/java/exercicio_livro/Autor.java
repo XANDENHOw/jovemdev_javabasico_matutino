@@ -21,11 +21,11 @@ public class Autor {
 
 	boolean valida() {
 
-		if (nome.trim().equals(" " + " ")) {
+		if (nome.trim().equals("")) {
 			JOptionPane.showMessageDialog(null, "Nome e sobrenome devem ser preenchidos");
 			return false;
 		}
-		if (sexo.equalsIgnoreCase("masculino") && sexo.equalsIgnoreCase("feminino")) {
+		if (!(sexo.equalsIgnoreCase("masculino") && sexo.equalsIgnoreCase("feminino"))) {
 			JOptionPane.showMessageDialog(null, "Preencha o gênero com as opções entre '( )'");
 			return false;
 		}
