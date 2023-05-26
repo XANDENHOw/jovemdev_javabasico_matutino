@@ -5,14 +5,15 @@ import javax.swing.JOptionPane;
 import lombok.Getter;
 
 @Getter
+
 public class Autor {
 	private String nome;
-	private String sexo;
+	private Sexo sexo;
 	private int idade;
 
 	void cadastraAutor() {
-		nome = JOptionPane.showInputDialog("Informe o nome e sobrenome do autor(a)");
-		sexo = JOptionPane.showInputDialog("Informe gênero do autor(a) (Masculino/Feminino)");
+		nome = JOptionPane.showInputDialog("Informe o nome e sobrenome do autor(a)").trim();
+		sexo = Util.escolheSexo();
 		idade = Integer.parseInt(JOptionPane.showInputDialog("Informe a idade"));
 		if(!valida()) {
 			cadastraAutor();
@@ -21,15 +22,12 @@ public class Autor {
 
 	boolean valida() {
 
-		if (nome.trim().equals("")) {
+		while(!(nome.contains(" "))) {
 			JOptionPane.showMessageDialog(null, "Nome e sobrenome devem ser preenchidos");
 			return false;
 		}
-		if (!(sexo.equalsIgnoreCase("masculino") && sexo.equalsIgnoreCase("feminino"))) {
-			JOptionPane.showMessageDialog(null, "Preencha o gênero com as opções entre '( )'");
-			return false;
-		}
-		if (idade <= 0) {
+
+		while (idade <= 0) {
 			JOptionPane.showMessageDialog(null, "A idade não pode ser inferior a 0");
 			return false;
 		}
@@ -43,12 +41,16 @@ public class Autor {
 			return false;
 		}
 	}
+	
+	boolean isGenero(Sexo enumSexo) {
+		return enumSexo == sexo;
 
-	boolean isMasculino() {
-		if(sexo.equalsIgnoreCase("masculino")) {
-			return true;			
-		} else {
-			return false;
-		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Nome do autor: " + nome + "\n"
+				+ "Sexo: " + sexo.getDesc() + "\n"
+				+ "idade: " + idade + "anos\n";
 	}
 }

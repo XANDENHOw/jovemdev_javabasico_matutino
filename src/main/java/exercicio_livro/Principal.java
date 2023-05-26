@@ -18,25 +18,25 @@ public class Principal {
 				Util.cadastraAutor(autores);
 				break;
 			case 2:
-				Util.cadastraLivro(livros);
+				Util.cadastraLivro(livros, autores);
 				break;
 			case 3:
 				Util.listarTodosLivros(livros);
 				break;
 			case 4:
-				//Util.buscaLivroAutor(livros);
+				Util.buscaLivroAutor(livros, autores);
 				break;
 			case 5:
-				//Util.buscaLivroPreco(livros);
+				Util.buscaLivroPreco(livros);
 				break;
 			case 6:
-				//Util.buscaAutorCrianca(livros);
+				Util.buscaAutorCrianca(livros);
 				break;
 			case 7:
-				//Util.buscaAutorGenero(livros);
+				Util.buscaAutorGenero(livros, autores);
 				break;
 			case 8:
-				JOptionPane.showMessageDialog(null, "Encerrando");
+				JOptionPane.showMessageDialog(null, "Encerrando...");
 				break;
 
 			default:

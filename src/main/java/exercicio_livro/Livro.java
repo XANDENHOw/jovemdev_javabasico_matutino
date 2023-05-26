@@ -13,28 +13,19 @@ public class Livro {
 	private double valor;
 	private List<Autor> autores = new ArrayList<Autor>();
 
-	void cadastraLivro() {
+	void cadastraLivro(List<Autor> listaAutores) {
 		titulo = JOptionPane.showInputDialog("Título do livro".toLowerCase());
 		valor = Double.parseDouble(JOptionPane.showInputDialog("Valor do livro"));
 		String op = "";
 		int numAutores = 0;
 		do {
-			Util.listaAutores(autores);
-			List<Autor> autoresLivro = new ArrayList<Autor>();// trocar essa parte para listar autores
-			String menu = "";
-			int pos = 1;
-
-			menu += pos + " - " + ((Autor) autoresLivro).getNome() + "\n";
-			pos++;
-			int opA = Integer.parseInt(menu);
-			autores.get(opA - 1);
-
-			do {
-				numAutores++;
-			} while (numAutores <= 4);
+			Util.escolheAutor(listaAutores);
+			numAutores++;
 			op = JOptionPane.showInputDialog("Deseja cadastrar mais autores? (S/N)");
-		} while (op.equalsIgnoreCase("S"));
-
+		} while (op.equalsIgnoreCase("S") && numAutores < 4);
+		if(!validaLivro(numAutores)) {
+			cadastraLivro(listaAutores);
+		}
 	}
 
 	boolean validaLivro(int numAutores) {
@@ -55,8 +46,19 @@ public class Livro {
 
 	@Override
 	public String toString() {
-		return "Título: " + titulo + "\n" + "Preço: " + valor + "\n" + "Autor(es)" + autores;
+		return "Título: " + titulo + "\n"
+				+ "Preço: " + valor + "\n"
+				+ "Autor(es)" + autores 
+				+ "\n" + autores.toString() + "\n";
 
+	}
+
+	public String getAutor() {
+		String autoresLivro = "";
+		for (Autor autor : autores) {
+			autoresLivro += autor.toString();
+		}
+		return autoresLivro;
 	}
 
 	boolean temAutor(List<Autor> autores) {
@@ -71,14 +73,15 @@ public class Livro {
 	}
 
 	boolean temCrianca() {
-		Autor crianca = autores.get(0);
-		if (crianca.getIdade() <= 12) {
-			return true;
-		} else {
-			return false;
+		for (Autor crianca : autores) {
+			if (crianca.isCrianca()) {
+				return true;
+			}
 		}
+
+		return false;
 	}
-	
+
 	boolean isFaixaPreco(double precoMin, double precoMax) {
 		return valor >= precoMin && valor <= precoMax;
 	}
