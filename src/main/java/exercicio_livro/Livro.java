@@ -46,10 +46,11 @@ public class Livro {
 
 	@Override
 	public String toString() {
+		Autor a = new Autor();
 		return "Título: " + titulo + "\n"
 				+ "Preço: " + valor + "\n"
 				+ "Autor(es)" + autores 
-				+ "\n" + autores.toString() + "\n";
+				+ "\n" + a.toString() + "\n";
 
 	}
 
@@ -70,6 +71,18 @@ public class Livro {
 			}
 		}
 		return false;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public List<Autor> getAutores() {
+		return autores;
 	}
 
 	boolean temCrianca() {

@@ -53,4 +53,16 @@ public class Autor {
 				+ "Sexo: " + sexo.getDesc() + "\n"
 				+ "idade: " + idade + "anos\n";
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
 }

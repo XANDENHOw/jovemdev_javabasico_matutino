@@ -20,4 +20,17 @@ public enum Sexo {
 		return null;
 	}
 
+	private Sexo(int cod, String desc) {
+		this.cod = cod;
+		this.desc = desc;
+	}
+
+	public int getCod() {
+		return cod;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
 }

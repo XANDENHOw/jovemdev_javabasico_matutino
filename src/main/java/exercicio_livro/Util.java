@@ -43,7 +43,7 @@ public class Util {
 	}
 
 	public static void listarTodosLivros(List<Livro> livros) {
-		String menu = "Listar livros\n";
+		String menu = "Lista de livros\n";
 		int pos = 1;
 		for (Livro livro : livros) {
 
@@ -56,12 +56,12 @@ public class Util {
 	}
 
 	public static void buscaLivroAutor(List<Livro> livros, List<Autor> listaAutores) {
-		String menu = "Listar livros\n";
+		String menu = "Lista de livros\n";
 		int pos = 1;
 		escolheAutor(listaAutores);
 		for (Livro livro : livros) {
 			if (livro.temAutor(listaAutores)) {
-				menu += pos + " - " + livro.getTitulo() + " - " + livro.getValor() + " - " + livro.getAutores() + "\n";
+				menu += pos + " - " + livro.toString() + "\n";
 				pos++;
 			}
 			JOptionPane.showMessageDialog(null, menu);
@@ -102,7 +102,7 @@ public class Util {
 
 	}
 
-	public static Autor listarAutores(List<Autor> listaAutores, List<Livro> livros) {// n funfa
+	public static Autor listarAutores(List<Autor> listaAutores, List<Livro> livros) {
 		String menu = "Escolha um autor\n";
 		int pos = 1;
 		for (Autor autor : listaAutores) {
