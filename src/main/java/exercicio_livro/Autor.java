@@ -45,24 +45,14 @@ public class Autor {
 	boolean isGenero(Sexo enumSexo) {
 		return enumSexo == sexo;
 
+		
 	}
 	
 	@Override
 	public String toString() {
 		return "Nome do autor: " + nome + "\n"
-				+ "Sexo: " + sexo.getDesc() + "\n"
+				+ "Sexo: " + sexo.getDescricao() + "\n"
 				+ "idade: " + idade + "anos\n";
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public Sexo getSexo() {
-		return sexo;
-	}
-
-	public int getIdade() {
-		return idade;
-	}
 }
