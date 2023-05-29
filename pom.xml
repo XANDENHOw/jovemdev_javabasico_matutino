@@ -6,12 +6,17 @@
     <artifactId>PooMatutino</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.26</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.0-M1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

@@ -17,7 +17,7 @@ public class Livro {
 		titulo = JOptionPane.showInputDialog("Título do livro".toLowerCase());
 		valor = Double.parseDouble(JOptionPane.showInputDialog("Valor do livro"));
 		String op = "";
-		int numAutores = 0;
+		int numAutores = 1;
 		do {
 			Util.escolheAutor(listaAutores);
 			numAutores++;
