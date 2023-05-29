@@ -21,7 +21,7 @@ public class Principal {
 				Util.cadastraLivro(livros, autores);
 				break;
 			case 3:
-				Util.listarTodosLivros(livros);
+				Util.listarTodosLivros(livros, autores);
 				break;
 			case 4:
 				Util.buscaLivroAutor(livros, autores);

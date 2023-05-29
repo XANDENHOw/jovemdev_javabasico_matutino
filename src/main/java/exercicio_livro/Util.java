@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-
 public class Util {
 
 	public static void escolheAutor(List<Autor> autores) {
@@ -15,8 +14,7 @@ public class Util {
 			menu += pos + " - " + autor.toString() + "\n";
 			pos++;
 		}
-		int op = Integer.parseInt(JOptionPane.showInputDialog(menu));
-		JOptionPane.showMessageDialog(null, op);
+		JOptionPane.showInputDialog(menu);
 	}
 
 	public static Livro escolheLivro(List<Livro> livros) {
@@ -42,12 +40,12 @@ public class Util {
 		livros.add(l);
 	}
 
-	public static void listarTodosLivros(List<Livro> livros) {
+	public static void listarTodosLivros(List<Livro> livros, List<Autor> autores) {
 		String menu = "Lista de livros\n";
 		int pos = 1;
 		for (Livro livro : livros) {
 
-			menu += pos + " - " + livro.toString() + "\n";
+			menu += pos + " - " + livro.getTitulo() + "\n";
 			pos++;
 
 		}
@@ -92,7 +90,7 @@ public class Util {
 
 	public static void buscaAutorGenero(List<Livro> livros, List<Autor> autores) {
 		Sexo genero = escolheSexo();
-		String ret = "Livros com autores do sexo %s: \n".formatted(genero.getDesc());
+		String ret = "Livros com autores do sexo %s: \n".formatted(genero.getDescricao());
 		for (Autor a : autores) {
 			if (a.isGenero(genero)) {
 				ret += a.toString();
@@ -114,9 +112,9 @@ public class Util {
 	}
 	
 	public static Sexo escolheSexo() {
-		String menu = "Cores disponíveis\n";
+		String menu = "Autores disponíveis\n";
 		for (Sexo genero : Sexo.values()) {
-			menu += genero.getCod() + " - " + genero.getDesc() + "\n";
+			menu += genero.getCodigo() + " - " + genero.getDescricao() + "\n";
 		}
 		int op = Integer.parseInt(JOptionPane.showInputDialog(menu));
 		return Sexo.findById(op);
