@@ -1,5 +1,8 @@
 package exercicio_medicamento;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +18,10 @@ public class Pessoa {
 	private String nome;
 	@NonNull
 	private String sintoma;
-	@NonNull
-	private String alergia;
+	private List<String> alergias = new ArrayList<>();
 	
+	
+	public void adicionaAlergia(String alergia) {
+		alergias.add(alergia);
+	}
 }
