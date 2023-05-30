@@ -7,17 +7,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import exercicio_medicamento.EnumAdminitracao;
-import exercicio_medicamento.Medicamento;
-import exercicio_medicamento.Pessoa;
 import exercicio_medicamento.Prescricao;
-import exercicio_medicamento.Util;
+import exercicio_medicamento.enums.EnumAdminitracao;
+import exercicio_medicamento.models.Medicamento;
+import exercicio_medicamento.models.Pessoa;
+import exercicio_medicamento.utils.Consultorio;
 
 
 
 public class UtilTest {
 	
-	private Util ut = new Util();
+	private Consultorio ut = new Consultorio();
 
 	
 	@BeforeEach

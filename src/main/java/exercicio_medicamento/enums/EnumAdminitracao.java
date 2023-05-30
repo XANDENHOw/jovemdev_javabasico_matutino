@@ -1,4 +1,4 @@
-package exercicio_medicamento;
+package exercicio_medicamento.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
