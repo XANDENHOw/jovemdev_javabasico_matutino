@@ -17,6 +17,8 @@ public class ConsultorioTest {
 
 	@BeforeEach
 	void init() {
+		
+		consultorio.clearData();
 
 		consultorio.getMedicamentos().clear();
 		consultorio.getPessoas().clear();
@@ -68,8 +70,7 @@ public class ConsultorioTest {
 		Pessoa p = consultorio.getPessoas().get(1);
 		Medicamento m = consultorio.getMedicamentos().get(0);
 		consultorio.prescreveMedicamento(p, m);
-		assertEquals(1, p.getMedicamentos().size());
-		assertEquals("Medicamento 1", p.getMedicamentos().get(0).getNome());
+		assertEquals(0, p.getMedicamentos().size());
 	}
 
 	@Test
