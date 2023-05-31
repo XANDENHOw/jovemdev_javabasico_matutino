@@ -7,7 +7,7 @@ public class Caixa {
 	private Conta conta;
 	private String operacao;
 	
-	public String depositar(double saldo, double valor) {
+	public String depositar(Conta conta, String operacao, double saldo, double valor) {
 		double result = saldo + valor;
 		String resultado = "Seu novo saldo é de:" + result;
 		return resultado;

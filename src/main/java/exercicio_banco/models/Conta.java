@@ -26,6 +26,14 @@ public class Conta {
 	}
 	
 	public double transferir(int numeroContaSaque, int numeroContaDeposito, double valor) {
+		if(Conta.this.getSaldo() >= valor) {
+			return sacar(numeroContaSaque, valor);
+			if() {
+				return depositar(numeroContaDeposito, valor);
+			}
+		}
+		
+		
 		return 0;
 	}
 }
