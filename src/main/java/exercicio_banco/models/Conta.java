@@ -11,33 +11,21 @@ public class Conta {
 	private double saldo;
 	
 	
-	public String depositar(double saldo, double valor) {
+	public double depositar(double saldo, double valor) {
 		double result = saldo + valor;
-		String resultado = "Seu novo saldo é de:" + result;
-		return resultado;
-	}
-	
-	public String sacar(double saldo, double valor) {
-		if(saldo >= valor) {
-			double result =  saldo - valor;
-			String resultado = "Saque realizado com sucesso.\n Seu novo saldo é de: " + result;
-			return resultado;
-		}
-		return "Seu saldo é insuficiente para realizar essa transação";
-	}
-	
-	public String transferir(int numeroContaSaque, int numeroContaDeposito, double valor) {
-		Conta saque = new Conta();
-		Conta deposito = new Conta();
-		double saldoSaque = saque.getSaldo();
-		double saldoDeposito = deposito.getSaldo();
-		if(saldoSaque >= valor) {
-			double sacada = saldoSaque - valor;
-			String novoSaldoSaque = "Seu novo saldo é de: " + sacada;
-			if()
-		}
-		
-		String result = "";
 		return result;
+	}
+	
+	public double sacar(double saldo, double valor) {
+		double result = saldo;
+		if(saldo >= valor) {
+			result =  saldo - valor;
+			return result;
+		}
+		return result;
+	}
+	
+	public double transferir(int numeroContaSaque, int numeroContaDeposito, double valor) {
+		return 0;
 	}
 }
