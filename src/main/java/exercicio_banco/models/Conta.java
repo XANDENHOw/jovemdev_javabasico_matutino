@@ -4,36 +4,33 @@ import lombok.Getter;
 
 @Getter
 public class Conta {
-	
-	private int numero;
-	private int agencia;
-	private String nomeCorrentista;
-	private double saldo;
-	
-	
-	public double depositar(double saldo, double valor) {
-		double result = saldo + valor;
-		return result;
+
+	protected int numero;
+	protected int agencia;
+	protected String nomeCorrentista;
+	protected double saldo;
+
+	public String depositar(double valor) {
+		saldo += valor;
+		String resultado = "Seu novo saldo é de: " + saldo;
+		return resultado;
 	}
-	
-	public double sacar(double saldo, double valor) {
+
+	public double sacar(double valor) {
 		double result = saldo;
-		if(saldo >= valor) {
-			result =  saldo - valor;
+		if (saldo >= valor) {
+			result = saldo - valor;
 			return result;
 		}
 		return result;
 	}
-	
-	public double transferir(int numeroContaSaque, int numeroContaDeposito, double valor) {
-		if(Conta.this.getSaldo() >= valor) {
-			return sacar(numeroContaSaque, valor);
-			if() {
-				return depositar(numeroContaDeposito, valor);
-			}
+
+	public double transferir(Conta contaDestino, double valor) {
+		if (saldo >= valor) {
+			saldo -= valor;
+			contaDestino.depositar(valor);
+			return saldo;
 		}
-		
-		
 		return 0;
 	}
 }

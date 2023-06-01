@@ -3,17 +3,26 @@ package exercicio_banco.models;
 import lombok.Getter;
 
 @Getter
-public class Especial extends Conta{
-	
-	private double limite = getSaldo() + 500;
+public class Especial extends Conta {
+
+	private double limite;
 
 	@Override
-	public double sacar(double limite, double valor) {
-		double result = limite;
-		if((limite - valor) >= 0) {
-			result = limite - valor;
+	public double sacar(double valor) {
+		if (((limite + getSaldo()) - valor) >= 0) {
+			double result = limite - valor;
 			return result;
 		}
-		return result;
+		return 0;
+	}
+
+	@Override
+	public double transferir(Conta contaDestino, double valor) {
+		if (saldo + limite >= valor) {
+			saldo -= valor;
+			contaDestino.depositar(valor);
+			return super.transferir(contaDestino, valor);
+		}
+		return 0;
 	}
 }
