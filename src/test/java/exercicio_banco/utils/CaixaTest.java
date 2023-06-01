@@ -27,8 +27,8 @@ public class CaixaTest {
     void transf1() {
 		Conta corr = caixa.getContas().get(1);
 		Universitaria uni = (Universitaria) caixa.getContas().get(0);
-		caixa.trasfere(corr, 10, uni);
-		assertEquals(0, corr.getSaldo());
+		caixa.transfere(corr, uni, 10);
+		assertEquals(2490, corr.getSaldo());
 		assertEquals(20, uni.getSaldo());
 	}
     @Test
@@ -38,8 +38,10 @@ public class CaixaTest {
     	Universitaria uni = (Universitaria) caixa.getContas().get(0);
     	caixa.deposito(uni, 1990);
     	assertEquals(2000, uni.getSaldo());
-    	caixa.trasfere(corr, 10, uni);
-    	assertEquals(0, corr.getSaldo());
-    	assertEquals(20, uni.getSaldo());
+    	caixa.transfere(corr, uni, 10);
+    	assertEquals(2500, corr.getSaldo());
+    	assertEquals(2000, uni.getSaldo());
     }
+    
+    
 }

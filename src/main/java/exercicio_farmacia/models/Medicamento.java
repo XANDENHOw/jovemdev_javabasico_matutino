@@ -16,24 +16,15 @@ public class Medicamento extends Produto {
 		this.precisaReceita = precisaReceita;
 	}
 
-	public boolean isReterReceita() {
-		return precisaReceita;
-	}
-
 	@Override
-	public boolean podeVender(int quantidade, double valor) {
-		if (!isReterReceita()) {
-			return super.podeVender(quantidade, valor);
-		}		
+	public boolean venda(Venda v) {
+		if(precisaReceita && v.getMedico() == null) {
 			return false;
-	}
-
-	public Medicamento cadastraProduto(String nome, int estoque, double valor, boolean receita) {
-		if (isPrecisaReceita()) {
-			Medicamento medicamento = new Medicamento(nome, estoque, valor, true);
-			return medicamento;
+		} else {
+			if(getEstoque() >= v.getQuantidade()) {	
+				return super.venda(v);
+			}			
 		}
-		Medicamento medicamento = new Medicamento(nome, estoque, valor, false);
-		return medicamento;
+		return false;
 	}
 }

@@ -14,10 +14,12 @@ public class Cliente {
 
 	
 	public void adicionarDebito(double valor) {
-        saldo += valor;
+        saldo = getSaldo() + valor;
     }
 	public void realizarPagamento(double valor) {
-        saldo -= valor;
+		if(valor > 0 && getSaldo() >= valor) {			
+			saldo -= valor;
+		}
     }
 	
 }

@@ -2,6 +2,8 @@ package exercicio_farmacia.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,43 +12,80 @@ import exercicio_farmacia.models.Cliente;
 import exercicio_farmacia.models.Equipamento;
 import exercicio_farmacia.models.Medicamento;
 import exercicio_farmacia.models.Perfumaria;
+import exercicio_farmacia.models.Venda;
 
 
 public class FarmaciaTest {
 	
-	Farmacia farmacia = new Farmacia();
-	
-	
+	private Farmacia farmacia = new Farmacia();
+	private Cliente c = null;
+	private Medicamento m1 = null;
+	private Medicamento m2 = null;
+	private Perfumaria p1 = null; 
+	private Equipamento e1 = null; 
+
 	@BeforeEach
-	void init() {
-		
-		farmacia.limparDados();
-		
-		Cliente c1 = new Cliente("Cliente 1", 200);
-		Cliente c2 = new Cliente("Cliente 2", 400);
-		Cliente c3 = new Cliente("Cliente 3", 50);
-		Cliente c4 = new Cliente("Cliente 4", 0);
-		farmacia.getClientes().add(c1);
-		farmacia.getClientes().add(c2);
-		farmacia.getClientes().add(c3);
-		farmacia.getClientes().add(c4);
-		
-		Perfumaria p1 = new Perfumaria("Perfume 1", 5, 200);
-		Equipamento e1 = new Equipamento("Equipamento 1", 0, 2000);
-		Equipamento e2 = new Equipamento("Equipamento 2", 3, 200);
-		Medicamento m1 = new Medicamento("Medicamento 1", 5, 300, true);
-		farmacia.getProdutos().add(p1);
-		farmacia.getProdutos().add(e1);
-		farmacia.getProdutos().add(e2);
-		farmacia.getProdutos().add(m1);
-		
+	public void init() {
+		farmacia.getVendas().clear();
+		c = new Cliente("Cliente", 0);
+		m1 = new Medicamento("M1", 10, 10, false);
+		m2 = new Medicamento("M1", 10, 10, true);
+		p1 = new Perfumaria("P1", 10, 10);
+		e1 = new Equipamento("E1", 0, 10);
+	}
+
+	@Test
+	@DisplayName("Venda de medicamento com receita sem informar o médico")
+	void testVenderMedicamentoComReceitaSemMedico() {
+		farmacia.vender(c, m2, 3, null);
+		assertEquals(0, c.getSaldo());
+		assertEquals(10, m2.getEstoque());
+	}
+
+	@Test
+	@DisplayName("Venda de medicamento com receita informando o médico")
+	void testVenderMedicamentoComReceitaComMedico() {
+		farmacia.vender(c, m2, 3, "Médico");
+		assertEquals(30, c.getSaldo());
+		assertEquals(7, m2.getEstoque());
+	}
+
+	@Test
+	@DisplayName("Venda de medicamento com quantidade acima do estoque")
+	void testVenderMedicamentoSemEstoque() {
+		farmacia.vender(c, m1, 20, null);
+		assertEquals(0, c.getSaldo());
+		assertEquals(10, m1.getEstoque());
+	}
+
+	@Test
+	@DisplayName("Venda de perfumaria para cliente com dívida maior que 300,00")
+	void testVenderPerfumariaComDivida() {
+		c.adicionarDebito(350);
+		farmacia.vender(c, p1, 1, null);
+		assertEquals(350, c.getSaldo());
+		assertEquals(10, p1.getEstoque());
+	}
+
+	@Test
+	@DisplayName("Venda de Equipamento médico sem estoque")
+	void testVenderEquipamentoMedico() {
+		farmacia.vender(c, e1, 1, null);
+		assertEquals(10, c.getSaldo());
+		assertEquals(-1, e1.getEstoque());
+	}
+
+	@Test
+	@DisplayName("Listar Vendas de um cliente")
+	void testVListarVendasCliente() {
+		farmacia.vender(c, m1, 1, null);
+		farmacia.vender(c, m2, 1, null);
+		farmacia.vender(c, p1, 50, null);
+		farmacia.vender(c, e1, 1, null);
+		List<Venda> vendas = farmacia.vendasPorCliente(c);
+		assertEquals(2, vendas.size());
+		assertEquals(20, c.getSaldo());
 	}
 	
-	@Test
-	@DisplayName("Teste mostrar cliente")
-	void mostraCliente() {
-		farmacia.cadastrarCliente("Cliente 5", 100);
-		assertEquals("Cliente 5 - Saldo Devedor: 100", 0);
-		
-	}
+	
 }

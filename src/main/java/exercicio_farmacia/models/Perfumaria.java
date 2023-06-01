@@ -7,17 +7,11 @@ public class Perfumaria extends Produto{
 	}
 	
 	@Override
-	public boolean podeVender(int quantidade, double valor) {
-		Cliente cliente = new Cliente();
-		if(cliente.getSaldo() <= 300) {
-		return super.podeVender(quantidade, valor);	
+	public boolean venda(Venda v) {
+		if(getEstoque() >= v.getQuantidade() && v.getCliente().getSaldo() < 300) {
+			return super.venda(v);			
 		}
 		return false;
-	}
-	
-	@Override
-	public Perfumaria cadastraProduto() {
-		return (Perfumaria) super.cadastraProduto();
 	}
 
 }

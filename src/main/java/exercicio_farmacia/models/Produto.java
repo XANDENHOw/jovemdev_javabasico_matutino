@@ -20,27 +20,11 @@ public class Produto {
 		}
 		return false;
 	}
-	public boolean baixarEstoque(int quantidade) {
-		if(temEstoque(getEstoque())) {
-			estoque -= quantidade;
-			return true;
-		}
-		return false;
-	}
+
 	
-	public boolean podeVender(int quantidade, double valor) {
-		if(temEstoque(getEstoque())) {	
-			baixarEstoque(quantidade);
-		}
-		return false;
-	}
-	
-	public Produto cadastraProduto() {
-		Produto produto = new Produto(nome, estoque, valor);        	
-		return produto;
-	}
-	
-	public void venda() {
-		
+	public boolean venda(Venda v) {
+		estoque = getEstoque() - v.getQuantidade();
+		v.getCliente().adicionarDebito(v.getQuantidade()*getValor());
+		return true;
 	}
 }
