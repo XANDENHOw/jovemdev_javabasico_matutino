@@ -7,22 +7,17 @@ public class Especial extends Conta {
 
 	private double limite;
 
-	@Override
-	public double sacar(double valor) {
-		if (((limite + getSaldo()) - valor) >= 0) {
-			double result = limite - valor;
-			return result;
-		}
-		return 0;
+	public Especial(int numeroConta, int numeroAgencia, String nomeCorrentista, double saldo, double limite) {
+		super(numeroConta, numeroAgencia, nomeCorrentista, saldo);
+		this.limite = limite;
 	}
 
 	@Override
-	public double transferir(Conta contaDestino, double valor) {
-		if (saldo + limite >= valor) {
-			saldo -= valor;
-			contaDestino.depositar(valor);
-			return super.transferir(contaDestino, valor);
+	public boolean sacar(double valor) {
+		if (((getLimite() + getSaldo()) - valor) >= 0) {
+			saldo = (getSaldo() + getLimite()) - valor;
+			return true;
 		}
-		return 0;
+		return false;
 	}
 }

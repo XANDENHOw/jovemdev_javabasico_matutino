@@ -1,36 +1,44 @@
 package exercicio_banco.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Conta {
 
-	protected int numero;
-	protected int agencia;
-	protected String nomeCorrentista;
+	private int numero;
+	private int agencia;
+	private String nomeCorrentista;
 	protected double saldo;
 
-	public String depositar(double valor) {
-		saldo += valor;
-		String resultado = "Seu novo saldo é de: " + saldo;
-		return resultado;
+	public boolean depositar(double valor) {
+		if(valor > 0) {			
+		saldo = getSaldo() + valor;
+		return true;
+		}
+		return false;
 	}
 
-	public double sacar(double valor) {
-		double result = saldo;
-		if (saldo >= valor) {
-			result = saldo - valor;
-			return result;
+	public boolean sacar(double valor) {
+		if(saldo >= valor) {
+			saldo = getSaldo() - valor;
+			return true;
 		}
-		return result;
+		return false;
 	}
 
-	public double transferir(Conta contaDestino, double valor) {
-		if (saldo >= valor) {
-			saldo -= valor;
-			contaDestino.depositar(valor);
-			return saldo;
+	public boolean transferir(Conta contaDestino, double valor) {
+		if(sacar(valor)) {
+			if(contaDestino.depositar(valor)) {
+				return true;
+			}else {
+				depositar(valor);
+				return false;
+			}
 		}
-		return 0;
+		return true;
 	}
 }

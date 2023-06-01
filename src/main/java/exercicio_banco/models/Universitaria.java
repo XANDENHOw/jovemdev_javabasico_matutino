@@ -1,29 +1,19 @@
 package exercicio_banco.models;
 
+import lombok.Getter;
+
+@Getter
 public class Universitaria extends Conta {
 
+	public Universitaria(int numeroConta, int numeroAgencia, String nomeCorrentista, double saldo) {
+		super(numeroConta, numeroAgencia, nomeCorrentista, saldo);
+	}
+
 	@Override
-	public double depositar(double valor) {
+	public boolean depositar(double valor) {
 		if ((getSaldo() + valor) <= 2000) {
 			return super.depositar(valor);
 		}
-		return 0;
+		return false;
 	}
-
-	@Override
-	public double transferir(Conta contaDestino, double valor) {
-		if(Universitaria.class.equals(contaDestino)) {
-			if (saldo >= valor && saldo + valor <= 2000.0) {
-				saldo += valor;
-				depositar(valor);
-				return saldo;
-			}			
-		}
-		if (saldo >= valor) {
-            saldo -= valor;
-            contaDestino.depositar(valor);
-            return saldo;
-	}
-		return 0;
-}
 }

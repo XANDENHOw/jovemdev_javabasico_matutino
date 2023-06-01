@@ -9,12 +9,38 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Produto {
 
-	protected String nome;
-	protected int estoque;
-	protected double valor;
+	private String nome;
+	private int estoque;
+	private double valor;
 	
-	public void baixarEstoque(int quantidade) {
-        estoque -= quantidade;
-    }
 	
+	public boolean temEstoque(int quantidade) {
+		if(estoque > quantidade) {
+			return true;
+		}
+		return false;
+	}
+	public boolean baixarEstoque(int quantidade) {
+		if(temEstoque(getEstoque())) {
+			estoque -= quantidade;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean podeVender(int quantidade, double valor) {
+		if(temEstoque(getEstoque())) {	
+			baixarEstoque(quantidade);
+		}
+		return false;
+	}
+	
+	public Produto cadastraProduto() {
+		Produto produto = new Produto(nome, estoque, valor);        	
+		return produto;
+	}
+	
+	public void venda() {
+		
+	}
 }
