@@ -286,5 +286,73 @@ inner join voto v on v.candidato = c.id
 group by c.nome, cid.nome, c.cidade, v.voto 
 order by c.cidade, v.voto desc;
 
+
+create or replace function incrementar(integer)
+returns integer as 
+$$
+    select $1 + 1;
+$$
+language sql;
+
+select incrementar(10);
+
+select cidade.nome, incrementar(cidade.qt_vereadores)
+from cidade 
+order by nome;
+
+create function quantidade() returns void as $$
+declare
+    quantidade integer := 30;
+begin
+    raise notice 'Quantidade antes de alterar: %', quantidade;
+    quantidade := 50;
+    raise notice 'Quantidade depois de alterar %', quantidade;
+end;
+$$ language plpgsql;
+
+select quantidade() from cargo;
+
+select c.* from candidato c 
+inner join cidade cid on c.cidade = cid.id 
+    and cid.nome = 'TUBARÃO'
+inner join cargo on c.cargo = cargo.id 
+    and cargo.nome = 'Prefeito'
+order by c.nome;
+
+
+create or replace function buscaCandidatos(cidade character varying, cargo character varying)
+returns setof candidato as 
+$$
+begin 
+    return QUERY select c.* from candidato c 
+                inner join cidade cid on c.cidade = cid.id 
+                    and cid.nome = $1
+                inner join cargo on c.cargo = cargo.id 
+                    and cargo.nome = $2
+                order by c.nome;
+    return;
+end
+$$ 
+language plpgsql;
+
+select buscaCandidatos('TUBARÃO', 'Prefeito');
+
+create or replace function buscaNomeNumCandidatos(cidade character varying, cargo character varying)
+returns table(numero int, nome text) as
+$$
+begin
+    return QUERY select c.numero, c.nome from candidato c 
+                inner join cidade cid on c.cidade = cid.id 
+                    and cid.nome = $1
+                inner join cargo on c.cargo = cargo.id 
+                    and cargo.nome = $2
+                order by c.nome;
+    return;
+end
+$$
+language plpgsql;
+
+select buscaNomeNumCandidatos('TUBARÃO', 'Prefeito');
+
 	
 	
