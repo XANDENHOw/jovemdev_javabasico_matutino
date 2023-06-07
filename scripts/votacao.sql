@@ -221,14 +221,43 @@ order by votos desc;
 
 -- questao 21
 select 
-    sum((vi.brancos + vi.nulos) + v.voto) as total_votos
-from cargo 
-inner join candidato c on c.cargo = cargo.id
+   sum(v.voto)+ (vi.brancos + vi.nulos) as total_votos
+from candidato c 
+inner join cargo on c.cargo = cargo.id
     and cargo.nome = 'Prefeito'
 inner join voto_invalido vi on vi.cargo = c.cargo 
+inner join voto v on v.candidato = c.id 
 inner join cidade cid on c.cidade = cid.id 
+and cid.nome = 'TUBARÃO'
+group by vi.brancos, vi.nulos;
 
-	
-	
+-- questao 22
+select 
+    cid.nome, cid.qt_eleitores as total_eleitores, (cid.qt_eleitores -  sum(v.voto) + (vi.brancos + vi.nulos)) as faltantes
+from cidade cid
+inner join candidato c on c.cidade = cid.id 
+inner join voto_invalido vi on vi.cargo = c.cargo  
+    and vi.cidade = c.cidade 
+inner join voto v on v.candidato = c.id 
+where cid.nome = 'TUBARÃO'
+group by cid.nome, cid.qt_eleitores, vi.brancos, vi.nulos;
+
+-- questao 23
+
+
+-- questao 24
+
+
+-- questao 25
+select distinct on (c.cidade) 
+     cid.nome, c.nome, max(v.voto)
+from candidato c 
+inner join cidade cid on c.cidade = cid.id 
+inner join cargo on c.cargo = cargo.id 
+    and cargo.nome = 'Prefeito'
+inner join voto v on v.candidato = c.id 
+group by c.nome, cid.nome, c.cidade 
+order by c.cidade;
+
 	
 	
