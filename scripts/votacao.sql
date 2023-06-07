@@ -219,34 +219,61 @@ inner join partido p on c.partido = p.id
 group by p.sigla
 order by votos desc;
 
+
 -- questao 21
 select 
-   sum(v.voto)+ (vi.brancos + vi.nulos) as total_votos
+   sum(v.voto) + (vi.brancos + vi.nulos) as total_votos
 from candidato c 
-inner join cargo on c.cargo = cargo.id
-    and cargo.nome = 'Prefeito'
-inner join voto_invalido vi on vi.cargo = c.cargo 
 inner join voto v on v.candidato = c.id 
 inner join cidade cid on c.cidade = cid.id 
-and cid.nome = 'TUBARÃO'
+    and cid.nome = 'TUBARÃO'
+inner join cargo on c.cargo = cargo.id
+    and cargo.nome = 'Prefeito'
+inner join voto_invalido vi on vi.cargo = cargo.id 
+    and vi.cidade = cid.id
 group by vi.brancos, vi.nulos;
 
 -- questao 22
 select 
-    cid.nome, cid.qt_eleitores as total_eleitores, (cid.qt_eleitores -  sum(v.voto) + (vi.brancos + vi.nulos)) as faltantes
+    cid.nome, cid.qt_eleitores as total_eleitores,
+    cid.qt_eleitores - (sum(v.voto) + (vi.brancos + vi.nulos)) as faltantes
 from cidade cid
-inner join candidato c on c.cidade = cid.id 
+inner join candidato c on c.cidade = cid.id
 inner join voto_invalido vi on vi.cargo = c.cargo  
     and vi.cidade = c.cidade 
 inner join voto v on v.candidato = c.id 
+inner join cargo on c.cargo = cargo.id
+    and cargo.nome = 'Prefeito'
 where cid.nome = 'TUBARÃO'
 group by cid.nome, cid.qt_eleitores, vi.brancos, vi.nulos;
 
 -- questao 23
-
+select 
+    cid.nome, cid.qt_eleitores as total_eleitores,
+    cid.qt_eleitores - (sum(v.voto) + (vi.brancos + vi.nulos)) as faltantes
+from cidade cid
+inner join candidato c on c.cidade = cid.id
+inner join voto_invalido vi on vi.cargo = c.cargo  
+    and vi.cidade = c.cidade 
+inner join voto v on v.candidato = c.id 
+inner join cargo on c.cargo = cargo.id
+    and cargo.nome = 'Prefeito'
+group by cid.nome, cid.qt_eleitores, vi.brancos, vi.nulos
+order by faltantes desc;
 
 -- questao 24
-
+select 
+    cid.nome,
+    ((cid.qt_eleitores - (sum(v.voto) + vi.brancos + vi.nulos)) / cid.qt_eleitores) * 100 as perc
+from cidade cid
+inner join candidato c on c.cidade = cid.id
+inner join voto_invalido vi on vi.cargo = c.cargo  
+    and vi.cidade = c.cidade 
+inner join voto v on v.candidato = c.id 
+inner join cargo on c.cargo = cargo.id
+    and cargo.nome = 'Prefeito'
+group by cid.nome, cid.qt_eleitores, vi.brancos, vi.nulos
+order by perc desc;
 
 -- questao 25
 select distinct on (c.cidade) 
@@ -256,8 +283,8 @@ inner join cidade cid on c.cidade = cid.id
 inner join cargo on c.cargo = cargo.id 
     and cargo.nome = 'Prefeito'
 inner join voto v on v.candidato = c.id 
-group by c.nome, cid.nome, c.cidade 
-order by c.cidade;
+group by c.nome, cid.nome, c.cidade, v.voto 
+order by c.cidade, v.voto desc;
 
 	
 	
