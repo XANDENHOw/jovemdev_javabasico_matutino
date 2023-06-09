@@ -352,7 +352,7 @@ end
 $$
 language plpgsql;
 
-select buscaNomeNumCandidatos('TUBARÃO', 'Prefeito');
+select buscaNomeNumCandidatos('TUBARÃO', 'Prefeito'); //aqui não tá funcionando
 
 	
 	
