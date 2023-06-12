@@ -1,3 +1,72 @@
+CREATE TABLE "e-commerce".cat_prod (
+    id serial4 NOT NULL,
+    categoria varchar NOT NULL,
+    CONSTRAINT cat_prod_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE "e-commerce".cidade (
+    id serial4 NOT NULL,
+    nome varchar NOT NULL,
+    uf varchar(2) NOT NULL,
+    CONSTRAINT cidade_pk PRIMARY KEY (id)
+);
+
+
+CREATE TABLE "e-commerce".endereco (
+    id serial4 NOT NULL,
+    rua varchar NOT NULL,
+    bairro varchar NOT NULL,
+    cidade int4 NOT NULL,
+    CONSTRAINT endereco_pk PRIMARY KEY (id),
+    CONSTRAINT endereco_fk FOREIGN KEY (cidade) REFERENCES "e-commerce".cidade(id)
+);
+
+CREATE TABLE "e-commerce".cliente (
+    id serial4 NOT NULL,
+    nome varchar NOT NULL,
+    sexo varchar(1) NOT NULL,
+    datanascimento date NOT NULL,
+    endereco int4 NOT NULL,
+    CONSTRAINT cliente_pk PRIMARY KEY (id),
+    CONSTRAINT cliente_fk FOREIGN KEY (endereco) REFERENCES "e-commerce".endereco(id)
+);
+
+CREATE TABLE "e-commerce".produto (
+    id serial4 NOT NULL,
+    nome varchar NOT NULL,
+    valor numeric NOT NULL,
+    estoque int4 NOT NULL,
+    categoria int4 NOT NULL,
+    CONSTRAINT produto_pk PRIMARY KEY (id),
+    CONSTRAINT produto_fk FOREIGN KEY (categoria) REFERENCES "e-commerce".cat_prod(id)
+);
+
+CREATE TABLE "e-commerce".venda (
+    id serial4 NOT NULL,
+    data_venda date NOT NULL,
+    cliente int4 NOT NULL,
+    CONSTRAINT venda_pk PRIMARY KEY (id),
+    CONSTRAINT venda_fk FOREIGN KEY (cliente) REFERENCES "e-commerce".cliente(id)
+);
+
+CREATE TABLE "e-commerce".pedido (
+    id serial4 NOT NULL,
+    id_produto int4 NOT NULL,
+    quantidade int4 NOT NULL,
+    id_venda int4 NOT NULL,
+    CONSTRAINT pedido_pk PRIMARY KEY (id),
+    CONSTRAINT pedido_fk FOREIGN KEY (id_produto) REFERENCES "e-commerce".produto(id),
+    CONSTRAINT pedido_fk_1 FOREIGN KEY (id_venda) REFERENCES "e-commerce".venda(id)
+);
+
+CREATE TABLE "e-commerce".telefone (
+    id serial4 NOT NULL,
+    numero varchar NOT NULL,
+    id_cliente int4 NOT NULL,
+    CONSTRAINT telefone_pk PRIMARY KEY (id),
+    CONSTRAINT telefone_fk FOREIGN KEY (id_cliente) REFERENCES "e-commerce".cliente(id)
+);
+
 insert into cat_prod (categoria) values ('Ferramenta'), ('Móvel'), ('Decoração'),
 	('Limpeza'), ('Higiene pessoal'), ('Alimento'), ('Categoria7'), ('Categoria8'),
 	('Categoria9'), ('Categoria10');
